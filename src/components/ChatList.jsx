@@ -3,13 +3,17 @@ import search from '../assets/search.png'
 import dots from '../assets/dots.png'
 import { users } from '../constant'
 import ChatCard from './ChatCard'
+import { Link } from 'react-router-dom'
 const ChatList = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isSearchOpen, setSearchOpen] = useState(false)
   const [searchedItem, setSearchedItem] = useState('');
   const handleChange = (e) => {
     setSearchedItem(e.target.value)
-}
+  }
+  const handleClick = () => {
+    window.location = '/'
+  }
   return (
     <div className='min-h-screen overflow-auto'>
         <div className='h-14 w-screen flex px-3 justify-between items-center shadow-sm'>
@@ -22,8 +26,8 @@ const ChatList = () => {
             </div>
             {
                 isMenuOpen && <div className='h-fit bg-white w-44 px-3 py-2 flex flex-col absolute right-0 top-12 shadow-xl rounded-lg'>
-                    <button className='w-fit text-xl p-2'>Profile</button>
-                    <button className='w-fit text-xl p-2'>Logout</button>
+                    <Link to={'/profile'} className='w-full border-b-2 border-gray-300 text-xl p-2 hover:font-semibold'>Profile</Link>
+                    <button className='w-fit text-xl p-2 hover:font-semibold' onClick={() => handleClick()}>Logout</button>
                 </div>
             }
         </div>
