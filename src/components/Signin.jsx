@@ -54,6 +54,12 @@ const Signin = ({trigger, setTrigger}) => {
         setSignUpOpen(!isSignUpOpen)
         // setTriggerRegistration(false)
     }
+
+    function handle(event){
+        event.preventDefault();
+        window.location = '/chats';
+    }
+
     if(isSignUpOpen)
         return <Signup trigger = {isSignUpOpen} setTrigger = {setSignUpOpen} />
     return (
@@ -65,7 +71,7 @@ const Signin = ({trigger, setTrigger}) => {
                 </div>
                 <div className="w-full py-7">
                     {/* <form onSubmit={(event) => handleForm(event)}> */}
-                    <form>
+                    <form onSubmit={(event) => handle(event)}>
                         <div className="flex flex-col py-1 px-2 border-x border-y border-black border-opacity-30 rounded-md transition-all mb-5 focus-within:border-black-600 focus-within:border-opacity-100">
                             <label htmlFor="email" className="text-[10px] uppercase font-bold tracking-widest transition-all">
                                 Email
