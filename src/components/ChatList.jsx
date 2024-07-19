@@ -31,7 +31,7 @@ const ChatList = () => {
                 </div>
             }
         </div>
-        <div className='p-3 h-full w-full flex flex-col gap-1'>
+        <div className='py-3 h-full w-full flex flex-col gap-1'>
             {
                 users && users.map((user) => {
                     return <Link to={'/chat/1'}><ChatCard user = {user}/></Link>

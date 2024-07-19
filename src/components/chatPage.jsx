@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import back from '../assets/back.png'
-import { users, chatMessages } from '../constant'
+import { users } from '../constant'
 import send from '../assets/send.png'
 import MessageCard from './MessageCard'
-
+import { useDispatch, useSelector } from 'react-redux'
+import { addMessage } from '../utils/userChatsSlice'
+import userChatsSlice from '../utils/userChatsSlice'
 const ChatPage = () => {
   const [message, setMessage] = useState('');
+  const chatMessages = useSelector(store => store.userChats.messages)
+  const dispatch = useDispatch()
   function handleChange(e){
     setMessage(e.target.value);
+  }
+  function handleClick(){
+    if(message.length > 0){
+        dispatch(addMessage(message));
+        console.log(chatMessages)
+        setMessage('')
+    }
   }
   return (
     <div className='h-screen w-screen'>
@@ -24,17 +35,11 @@ const ChatPage = () => {
                 chatMessages && chatMessages.map((message, index) => {
                     return <MessageCard key={index} message = {message}/>
                 })
-            }
-            
-            <div className='h-fit w-full flex items-center justify-end'>
-                <p className='w-[85%] py-2 px-3 bg-gray-300 rounded-lg'>Hii i am rishabh, how are you tell me something about todays wheather</p>
-            </div>
-            
-            
+            }            
         </div>
         <div className='fixed bottom-0 left-0 h-[10%] bg-white w-full flex items-center justify-between px-3'>
-            <input className='h-11 w-[85%] text-lg px-4 outline-none transition-all rounded-full border-2 bg-gray-300' type='text' name='search' placeholder='type message...' onChange={(e) => handleChange(e)}/>
-            <img className='w-7' src={send} alt='send'/>
+            <input className='h-11 w-[85%] text-lg px-4 outline-none transition-all rounded-full border-2 bg-gray-300' type='text' name='search' placeholder='type message...' value={message} onChange={(e) => handleChange(e)}/>
+            <img className='w-7' src={send} alt='send' onClick={() => handleClick()}/>
         </div>
     </div>
   )
