@@ -42,7 +42,7 @@ const Homepage = () => {
                 <p>Let's start talking with our <span className='text-lg font-bold'>Convocave</span> – where every conversation weaves a story.</p>
             </div>
             <div className='h-fit w-full flex justify-center py-5'>
-                <button className='h-12 w-32 border-2 border-black rounded-lg text-xl font-semibold hover:bg-black hover:text-white' onClick={() => handleClick()}>GetIn</button>
+                <button className='h-12 w-32 border-2 border-black rounded-lg text-xl font-semibold hover:bg-black hover:text-white uppercase tracking-wide' onClick={() => handleClick()}>GetIn</button>
             </div>
         </div>
         {isSignInOpen && <Signin trigger = {isSignInOpen} setTrigger = {setSignInOpen}/>}

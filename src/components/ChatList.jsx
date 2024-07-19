@@ -27,14 +27,14 @@ const ChatList = () => {
             {
                 isMenuOpen && <div className='h-fit bg-white w-44 px-3 py-2 flex flex-col absolute right-0 top-12 shadow-xl rounded-lg'>
                     <Link to={'/profile'} className='w-full text-xl p-2 hover:font-semibold'>Profile</Link>
-                    <button className='w-fit text-xl p-2 hover:font-semibold' onClick={() => handleClick()}>Logout</button>
+                    <button className='w-full text-left text-xl p-2 hover:font-semibold' onClick={() => handleClick()}>Logout</button>
                 </div>
             }
         </div>
         <div className='p-3 h-full w-full flex flex-col gap-1'>
             {
                 users && users.map((user) => {
-                    return <ChatCard user = {user}/>
+                    return <Link to={'/chat/1'}><ChatCard user = {user}/></Link>
                 })
             }
         </div>
