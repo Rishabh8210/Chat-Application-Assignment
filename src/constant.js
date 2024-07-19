@@ -52,3 +52,17 @@ export const users = [
       }
   ];
   
+
+export const chatMessages = [
+    { message: 'Hey, did you finish the math homework?' },
+    { message: 'Not yet, it’s really tough. How about you?' },
+    { message: 'Same here. I’ve been stuck on question 3 for hours.' },
+    { message: 'Yeah, that equation is confusing. I tried looking it up online but couldn’t find a clear explanation. Maybe we should ask the teacher tomorrow?' },
+    { message: 'Good idea! I’ll make a note to ask during the class. What time are you free to study together today?' },
+    { message: 'I’m free after 5 PM. I have a biology lab until then, but I can meet in the library after that.' },
+    { message: 'Perfect, let’s meet in the library at 5 PM. I’ll bring my notes and textbook.' },
+    { message: 'Sounds good. By the way, did you hear about the new school trip to the science museum? It sounds really exciting!' },
+    { message: 'Yes, I did! I’m definitely planning to go. I think it’ll be a great learning experience and a lot of fun. Are you going?' },
+    { message: 'Absolutely! I love visiting museums, and I heard this one has some amazing exhibits on robotics and space exploration.' },
+    { message: 'That’s awesome! I can’t wait to see the robotics section. I’ve always been fascinated by how robots are designed and built.' }
+  ]
