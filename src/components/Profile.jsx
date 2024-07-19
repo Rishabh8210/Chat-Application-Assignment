@@ -79,11 +79,13 @@ import back from '../assets/back.png';
 import phone from '../assets/phone.png';
 import { decodeJWT } from '../utils/helper';
 import EditPage from './EditPage';
+import Confirmation from './Confirmation';
 
 const Profile = () => {
     const [userData, setUserData] = useState(null);
     const token = localStorage.getItem('token');
     const [isEditOpen, setEditOpen] = useState(false);
+    const [confirmDelete, setconfirmDelete] = useState(false)
     
     useEffect(() => {
         const fetchData = async () => {
@@ -175,13 +177,14 @@ const Profile = () => {
                     </button>
                     <button 
                         className='h-10 w-28 border-2 border-black rounded-lg text-md font-semibold hover:bg-black hover:text-white uppercase tracking-wide'
-                        onClick={handleDelete}
+                        onClick={() => setconfirmDelete(!confirmDelete)}
                     >
                         Delete
                     </button>
                 </div>
             </div>
             {isEditOpen && <EditPage trigger={isEditOpen} setTrigger={setEditOpen}/>}
+            {confirmDelete && <Confirmation trigger={confirmDelete} setTrigger={setconfirmDelete} handleDelete = {handleDelete}/>}
         </div>
     );
 };
