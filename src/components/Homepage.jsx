@@ -5,6 +5,7 @@ import MainLogo from '../assets/MainLogo.png'
 import Signin from './Signin'
 import { io } from 'socket.io-client'
 import {decodeJWT} from './../utils/helper'
+import { useNavigate } from 'react-router-dom'
 
 
 const NavBar = ({ trigger, setTrigger }) => {
@@ -29,28 +30,32 @@ const Homepage = () => {
   const [isSignInOpen, setSignInOpen] = useState(false)
   const [isNavOpen, setNavOpen] = useState(false);
   const [socket, setSocket] = useState(null)
-  
+  const navigate = useNavigate()
 
-  useEffect(() => {
-    setSocket(io('http://localhost:8000'))
-  }, [])
+  // useEffect(() => {
+  //   setSocket(io('http://localhost:8000'))
+  // }, [])
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if(token){
-      const response = decodeJWT(token)
-      setUserId(response?.userId)
-    }
-    if(userId){
-      socket?.emit("addUser", userId);
-      socket?.on("getUsers", (users) => {
-        console.log(users);
-      });
-    }
-  }, []);
+  // useEffect(() => {
+  //   const token = localStorage.getItem("token");
+  //   if(token){
+  //     const response = decodeJWT(token)
+  //     setUserId(response?.userId)
+  //     console.log(userId)
+  //     socket?.emit("addUser", userId);
+  //     socket?.on("getUsers", (users) => {
+  //       console.log("Online Users:", users);
+  //     });
+  //     socket?.on('getMessage', data => {
+  //       console.log("Receiverd data", data);
+  //     })
+  //   }
+  // }, [socket]);
 
 
   function handleClick() {
+    if(localStorage.getItem('token'))
+      return navigate('/chats')
     setSignInOpen(!isSignInOpen)
   }
 

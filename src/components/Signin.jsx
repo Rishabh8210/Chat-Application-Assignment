@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useFormik } from "formik";
 import { signUpSchema } from "../schemas/SigninSignup";
 import Signup from "./Signup";
-
+import { useNavigate } from "react-router-dom";
 const initialValues = {
     email: "",
     password: ""
@@ -11,6 +11,7 @@ const initialValues = {
 
 const Signin = ({trigger, setTrigger}) => {
     const isLoggedIn = localStorage.getItem('token')
+    const navigate = useNavigate()
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues,
@@ -42,7 +43,7 @@ const Signin = ({trigger, setTrigger}) => {
             console.log("successssssssssssssssss", response)
             localStorage.setItem('token', response.data.token);
             //setIsLoggedIn(true);           
-            window.location = '/chats';
+            navigate('/chats');
         } catch (error) {
             // window.location = '/';
             console.error('Error registering user:', error);
@@ -56,13 +57,9 @@ const Signin = ({trigger, setTrigger}) => {
         // setTriggerRegistration(false)
     }
 
-    function handle(event){
-        event.preventDefault();
-        window.location = '/chats';
-    }
 
     if(isLoggedIn){
-        window.location = '/chats'
+        navigate('/chats')
         return 
     }
     if(isSignUpOpen)

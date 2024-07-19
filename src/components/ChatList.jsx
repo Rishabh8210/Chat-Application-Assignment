@@ -1,25 +1,50 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import search from '../assets/search.png'
 import dots from '../assets/dots.png'
-import { users } from '../constant'
+// import { users } from '../constant'
 import ChatCard from './ChatCard'
 import { Link } from 'react-router-dom'
+import axios from 'axios'
+import { decodeJWT } from '../utils/helper'
 const ChatList = () => {
   const [isMenuOpen, setMenuOpen] = useState(false)
   const [isSearchOpen, setSearchOpen] = useState(false)
   const [searchedItem, setSearchedItem] = useState('');
-  const [searchedUser, setSearchedUser] = useState(users);
+  const [searchedUser, setSearchedUser] = useState([]);
+  const token = localStorage.getItem('token')
+  const { userId } = decodeJWT(token);
+
+  useEffect(() => {
+    async function getData(){
+      try {
+        const response = await axios.get('http://localhost:3001/api/v1/users/chats', {
+          headers:{
+            'Authorization': `Bearer ${token}`
+          }
+        })
+        let users = response?.data?.data;
+        let filteredUsers = users.filter((user) => user.id !== userId)
+        setSearchedUser(filteredUsers);
+      } catch (error) {
+        console.log(error)
+      }
+    }
+
+    getData();
+  }, [])
+
+
   const handleChange = (e) => {
     const value = e.target.value;
     setSearchedItem(value);
     // console.log(value);
 
     if (value.length > 0) {
-      const filter = prefixFilter(users, value, e);
+      const filter = prefixFilter(searchedUser, value, e);
       setSearchedUser(filter);
     }
     if (value.length == 0)
-      setSearchedUser(users);
+      setSearchedUser(searchedUser);
   };
 
   const handleClick = () => {
@@ -27,8 +52,8 @@ const ChatList = () => {
     window.location = '/';
   };
 
-  const prefixFilter = (users, value) => {
-    return users.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
+  const prefixFilter = (searchedUser, value) => {
+    return searchedUser.filter((user) => user.name.toLowerCase().includes(value.toLowerCase()));
   };
   if (!localStorage.getItem('token')) {
     return window.location = '/'
@@ -58,7 +83,7 @@ const ChatList = () => {
         {
           searchedUser ? (searchedUser.length == 0 ? <p className='p-2 text-md font-semibold text-center'>No user found !</p> :
             searchedUser.map((user, index) => {
-              return <Link to={'/chat/1'}><ChatCard user={user} key={index} /></Link>
+              return <Link to={`/chat/${user?.id}`}><ChatCard user={user} key={user?.id} /></Link>
             })) : <></>
         }
       </div>
