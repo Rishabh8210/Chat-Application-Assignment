@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import axios from 'axios'
+import axios from 'axios'
 import { useFormik } from "formik";
 import { signUpSchema } from "../schemas/SigninSignup";
 import Signup from "./Signup";
@@ -10,6 +10,7 @@ const initialValues = {
 };
 
 const Signin = ({trigger, setTrigger}) => {
+    const isLoggedIn = localStorage.getItem('token')
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues,
@@ -37,13 +38,13 @@ const Signin = ({trigger, setTrigger}) => {
                 password: values.password
             }
             console.log(data)
-            // const response = await axios.post('http://localhost:3000/api/v1/user/signin', data);
-            // localStorage.setItem('token', response.data.token);
-            // localStorage.setItem('name', response.data.name);
-            // console.log('Response from server:', response.data.data.name);
-            // window.location = '/dashboard';
+            const response = await axios.post('http://localhost:3001/api/v1/auth/signin', data);
+            console.log("successssssssssssssssss", response)
+            localStorage.setItem('token', response.data.token);
+            //setIsLoggedIn(true);           
+            window.location = '/chats';
         } catch (error) {
-            window.location = '/';
+            // window.location = '/';
             console.error('Error registering user:', error);
         }
     }
@@ -60,18 +61,22 @@ const Signin = ({trigger, setTrigger}) => {
         window.location = '/chats';
     }
 
+    if(isLoggedIn){
+        window.location = '/chats'
+        return 
+    }
     if(isSignUpOpen)
         return <Signup trigger = {isSignUpOpen} setTrigger = {setSignUpOpen} />
     return (
         <div className='fixed z-20 top-0 left-0 h-screen w-full px-5 flex flex-col justify-center items-center bg-zinc-800 bg-opacity-50'>
-            <div className='min-h-[60vh] max-h-[90vh] w-full bg-white shadow-lg flex flex-col justify-center items-center rounded-lg p-5'>
+            <div className='min-h-[60vh] max-h-[90vh] w-full lg:w-[50%] bg-white shadow-lg flex flex-col justify-center items-center rounded-lg p-5'>
                 <div className='h-10 w-full px-2 flex justify-between'>
                     <p className='font-semibold text-3xl border-b-4 border-black'>Welcome !</p>
                     <button className='h-full w-10 text-base text-white bg-black hover:bg-white hover:text-black hover:border-2 hover:border-black rounded-lg font-bold' onClick={() => setTrigger(!trigger)}>X</button>
                 </div>
                 <div className="w-full py-7">
-                    {/* <form onSubmit={(event) => handleForm(event)}> */}
-                    <form onSubmit={(event) => handle(event)}>
+                    <form onSubmit={(event) => handleForm(event)}>
+                    {/* <form onSubmit={(event) => handle(event)}> */}
                         <div className="flex flex-col py-1 px-2 border-x border-y border-black border-opacity-30 rounded-md transition-all mb-5 focus-within:border-black-600 focus-within:border-opacity-100">
                             <label htmlFor="email" className="text-[10px] uppercase font-bold tracking-widest transition-all">
                                 Email
@@ -129,3 +134,7 @@ const Signin = ({trigger, setTrigger}) => {
 };
 
 export default Signin;
+
+
+
+
