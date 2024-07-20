@@ -6,7 +6,10 @@ const ChatCard = ({user}) => {
       {/* {console.log(user)} */}
         <div className='flex items-center gap-5 w-full text-nowrap'>
             <img className='h-9 rounded-full' src={userImg} alt='user'/>
-            <p className='text-xl font-semibold'>{user && user?.name}</p>
+            <div className='flex flex-col'>
+              <p className='text-xl font-semibold'>{user && user?.name}</p>
+              <p className='text-sm font-semibold text-gray-500'>{user && user?.email}</p>
+            </div>
         </div>
     </div>
   )

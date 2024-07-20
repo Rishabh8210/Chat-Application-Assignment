@@ -11,6 +11,7 @@ const ChatList = () => {
   const [isSearchOpen, setSearchOpen] = useState(false)
   const [searchedItem, setSearchedItem] = useState('');
   const [searchedUser, setSearchedUser] = useState([]);
+  const [filerSearchUser, setFilteredUser] = useState([])
   const token = localStorage.getItem('token')
   
   useEffect(() => {
@@ -28,6 +29,7 @@ const ChatList = () => {
         let users = response?.data?.data;
         let filteredUsers = users.filter((user) => user.id !== userId)
         setSearchedUser(filteredUsers);
+        setFilteredUser(filteredUsers)
       } catch (error) {
         console.log(error)
       }
@@ -43,11 +45,11 @@ const ChatList = () => {
     // console.log(value);
 
     if (value.length > 0) {
-      const filter = prefixFilter(searchedUser, value, e);
+      const filter = prefixFilter(filerSearchUser, value, e);
       setSearchedUser(filter);
     }
     if (value.length == 0)
-      setSearchedUser(searchedUser);
+      setSearchedUser(filerSearchUser);
   };
 
   const handleClick = () => {
@@ -84,7 +86,7 @@ const ChatList = () => {
       </div>
       <div className='py-3 h-full w-full flex flex-col gap-1'>
         {
-          searchedUser ? (searchedUser.length == 0 ? <p className='p-2 text-md font-semibold text-center'>No user found !</p> :
+          searchedUser ? (searchedUser.length == 0 ? <p className='p-2 text-md font-semibold text-center text-red-700'>No user found !</p> :
             searchedUser.map((user, index) => {
               return <Link to={`/chat/${user?.id}`}><ChatCard user={user} key={user?.id} /></Link>
             })) : <></>

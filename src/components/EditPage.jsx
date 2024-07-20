@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from 'axios'
 import back from '../assets/back.png'
 import { decodeJWT } from "../utils/helper";
@@ -11,6 +11,7 @@ const initialValues = {
 };
 
 const EditPage = ({ trigger, setTrigger }) => {
+    const [error, setError] = useState('');
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues,
@@ -34,9 +35,9 @@ const EditPage = ({ trigger, setTrigger }) => {
             const response = decodeJWT(token);
             const userId = response.userId;
             const data = {
-                name: values.name,
-                email: values.email,
-                phone: values.phone
+                name: values.name || null,
+                email: values.email || null,
+                phone: values.phone || null
             }
             console.log(data)
             const updatedData = await axios.patch(`http://localhost:3001/api/v1/users/${userId}`, data,{
@@ -47,7 +48,8 @@ const EditPage = ({ trigger, setTrigger }) => {
             console.log('Response from server:', response);
             window.location = '/profile';
         } catch (error) {
-            console.error('Error registering user:', error);
+            setError('All fields are required.')
+            console.error('Error Updating user:', error);
         }
     }
     return (
@@ -122,6 +124,7 @@ const EditPage = ({ trigger, setTrigger }) => {
                             <button className="py-3 px-4 outline-0 uppercase border-0 rounded-md text-white bg-black hover:bg-black transition-all" type="submit">
                                 Save
                             </button>
+                            <p className="text-xl text-red-700 font-semibold">{error}</p>
                         </div>
                     </form>
                 </div>

@@ -12,6 +12,7 @@ const initialValues = {
 const Signin = ({trigger, setTrigger}) => {
     const isLoggedIn = localStorage.getItem('token')
     const navigate = useNavigate()
+    const [error, setError] = useState('');
     const { values, errors, touched, handleBlur, handleChange, handleSubmit } =
         useFormik({
             initialValues,
@@ -44,9 +45,12 @@ const Signin = ({trigger, setTrigger}) => {
             localStorage.setItem('token', response.data.token);
             //setIsLoggedIn(true);           
             navigate('/chats');
-        } catch (error) {
+        } catch (errorObj) {
             // window.location = '/';
-            console.error('Error registering user:', error);
+            // console.log(errorObj?.response?.data?.message)
+            setError(errorObj?.response?.data?.message)
+            // console.error('Error registering user:', errorObj);
+
         }
     }
 
@@ -122,6 +126,7 @@ const Signin = ({trigger, setTrigger}) => {
                             <button className="py-3 px-4 outline-0 uppercase border-0 rounded-md text-white bg-black hover:bg-black transition-all" type="submit">
                                 Login
                             </button>
+                            <p className="text-red-700 text-xl font-semibold">{error && error}</p>
                         </div>
                     </form>
                 </div>
