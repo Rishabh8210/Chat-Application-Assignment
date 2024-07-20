@@ -18,17 +18,10 @@ const Signup = ({ trigger, setTrigger }) => {
             initialValues,
             validationSchema: signUpSchema,
             onSubmit: async (values, action) => {
-                console.log(
-                    "file: Registration.jsx ~ line 11 ~ Registration ~ values",
-                    values
-                );
                 action.resetForm();
             },
         });
-    console.log(
-        "file: Registration.jsx ~ line 25 ~ Registration ~ errors",
-        errors
-    );
+
     async function handleForm(event) {
         event.preventDefault();
         try {
@@ -39,12 +32,11 @@ const Signup = ({ trigger, setTrigger }) => {
                 phone: values.phone,
                 role: values.role
             }
-            console.log(data)
             const response = await axios.post('http://localhost:3001/api/v1/auth/signup', data);
-            console.log('Response from server:', response.data);
+            // console.log('Response from server:', response.data);
             window.location = '/';
         } catch (error) {
-            console.error('Error registering user:', error);
+            // console.error('Error registering user:', error);
         }
     }
     return (
@@ -57,7 +49,6 @@ const Signup = ({ trigger, setTrigger }) => {
                 </div>
                 <div className="w-full py-7">
                     <form onSubmit={(event) => handleForm(event)}>
-                    {/* <form> */}
                         <div className="flex flex-col py-1 px-2 border-x border-y border-black border-opacity-30 rounded-md transition-all mb-5 focus-within:border-black focus-within:border-opacity-100">
                             <label htmlFor="name" className="text-[10px] uppercase font-bold tracking-widest transition-all">
                                 Name

@@ -17,17 +17,9 @@ const EditPage = ({ trigger, setTrigger }) => {
             initialValues,
             validationSchema: signUpSchema,
             onSubmit: async (values, action) => {
-                console.log(
-                    "file: Registration.jsx ~ line 11 ~ Registration ~ values",
-                    values
-                );
                 action.resetForm();
             },
         });
-    console.log(
-        "file: Registration.jsx ~ line 25 ~ Registration ~ errors",
-        errors
-    );
     async function handleForm(event) {
         event.preventDefault();
         try {
@@ -58,7 +50,6 @@ const EditPage = ({ trigger, setTrigger }) => {
                 <div className='h-10 w-full flex justify-between items-center'>
                     <p className='font-semibold text-3xl border-b-4 border-black'>Edit Profile </p>
                     <img className="h-8 text-base border-black border-2 text-white rounded-lg font-bold" src={back} alt='<-' onClick={() => setTrigger(!trigger)} />
-                    {/* <button className='h-full w-10 text-base bg-black hover:bg-black text-white rounded-lg font-bold' onClick={() => setTrigger(!trigger)}>{back}</button> */}
                 </div>
                 <div className="w-full py-7">
                     <form onSubmit={(event) => handleForm(event)}>

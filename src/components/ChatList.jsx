@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import search from '../assets/search.png'
 import dots from '../assets/dots.png'
-// import { users } from '../constant'
 import ChatCard from './ChatCard'
 import { Link } from 'react-router-dom'
 import axios from 'axios'

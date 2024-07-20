@@ -18,18 +18,10 @@ const Signin = ({trigger, setTrigger}) => {
             initialValues,
             validationSchema: signUpSchema,
             onSubmit: async(values, action) => {
-                console.log(
-                    "file: Registration.jsx ~ line 11 ~ Registration ~ values",
-                    values
-                );
-                
                 action.resetForm();
             },
         });
-    console.log(
-        "file: Registration.jsx ~ line 25 ~ Registration ~ errors",
-        errors
-    );
+    
 
 
     async function handleForm(event){
@@ -41,16 +33,11 @@ const Signin = ({trigger, setTrigger}) => {
             }
             console.log(data)
             const response = await axios.post('http://localhost:3001/api/v1/auth/signin', data);
-            console.log("successssssssssssssssss", response)
-            localStorage.setItem('token', response.data.token);
-            //setIsLoggedIn(true);           
+            
+            localStorage.setItem('token', response.data.token);         
             navigate('/chats');
         } catch (errorObj) {
-            // window.location = '/';
-            // console.log(errorObj?.response?.data?.message)
             setError(errorObj?.response?.data?.message)
-            // console.error('Error registering user:', errorObj);
-
         }
     }
 
@@ -136,7 +123,3 @@ const Signin = ({trigger, setTrigger}) => {
 };
 
 export default Signin;
-
-
-
-
