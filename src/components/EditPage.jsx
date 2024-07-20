@@ -52,7 +52,7 @@ const EditPage = ({ trigger, setTrigger }) => {
     }
     return (
         <div className='fixed top-0 left-0 h-screen w-full px-5 flex flex-col justify-center items-center bg-zinc-800 bg-opacity-50'>
-            <div className='min-h-[60vh] max-h-[95vh] w-full lg:w-[50%] bg-white shadow-lg flex flex-col items-center rounded-lg py-3 px-5'>
+            <div className='min-h-[60vh] max-h-[95vh] w-full sm:w-[65%] lg:w-[50%] bg-white shadow-lg flex flex-col items-center rounded-lg py-3 px-5'>
                 <div className='h-10 w-full flex justify-between items-center'>
                     <p className='font-semibold text-3xl border-b-4 border-black'>Edit Profile </p>
                     <img className="h-8 text-base border-black border-2 text-white rounded-lg font-bold" src={back} alt='<-' onClick={() => setTrigger(!trigger)} />

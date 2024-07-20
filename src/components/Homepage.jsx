@@ -67,7 +67,7 @@ const Homepage = () => {
         <img className='h-7' src={login} alt='#' onClick={() => handleClick()} />
       </div>
       <div className=' min-h-[50vh] flex flex-col items-center justify-center py-10 px-5 gap-2'>
-        <img className='w-[50%] lg:w-[20%]' src={MainLogo} alt='Image' />
+        <img className='w-[50%] sm:w-[40%] md:w-[30%] lg:w-[20%]' src={MainLogo} alt='Image' />
         <p className='text-4xl font-bold uppercase'>CONVOCAVE</p>
         <p className='text-lg text-gray-600'>a new era of talking</p>
         <div className='h-fit w-full text-center py-5'>

@@ -132,8 +132,8 @@ const ChatPage = () => {
                 })
             }            
         </div>  
-        <div className='fixed bottom-0 left-0 h-[10%] bg-white w-full flex items-center justify-between px-3'>
-            <input className='h-11 w-[85%] text-lg px-4 outline-none transition-all rounded-full border-2 bg-gray-300' type='text' name='search' placeholder='type message...' value={message} onChange={(e) => handleChange(e)}/>
+        <div className='fixed bottom-0 left-0 h-[10%] bg-white w-full flex items-center justify-between md:justify-center md:gap-10 px-3'>
+            <input className='h-11 w-[90%] text-lg px-4 outline-none transition-all rounded-full border-2 bg-gray-300' type='text' name='search' placeholder='type message...' value={message} onChange={(e) => handleChange(e)}/>
             <img className='w-7' src={send} alt='send' onClick={() => handleClick()}/>
         </div>
     </div>

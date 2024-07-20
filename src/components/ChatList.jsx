@@ -12,10 +12,13 @@ const ChatList = () => {
   const [searchedItem, setSearchedItem] = useState('');
   const [searchedUser, setSearchedUser] = useState([]);
   const token = localStorage.getItem('token')
-  const { userId } = decodeJWT(token);
-
+  
   useEffect(() => {
     async function getData(){
+      if (!localStorage.getItem('token')) {
+        return window.location = '/'
+      }
+      const { userId } = decodeJWT(token);
       try {
         const response = await axios.get('http://localhost:3001/api/v1/users/chats', {
           headers:{

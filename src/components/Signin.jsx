@@ -66,7 +66,7 @@ const Signin = ({trigger, setTrigger}) => {
         return <Signup trigger = {isSignUpOpen} setTrigger = {setSignUpOpen} />
     return (
         <div className='fixed z-20 top-0 left-0 h-screen w-full px-5 flex flex-col justify-center items-center bg-zinc-800 bg-opacity-50'>
-            <div className='min-h-[60vh] max-h-[90vh] w-full lg:w-[50%] bg-white shadow-lg flex flex-col justify-center items-center rounded-lg p-5'>
+            <div className='min-h-[60vh] max-h-[90vh] w-full sm:w-[65%] lg:w-[50%] bg-white shadow-lg flex flex-col justify-center items-center rounded-lg p-5'>
                 <div className='h-10 w-full px-2 flex justify-between'>
                     <p className='font-semibold text-3xl border-b-4 border-black'>Welcome !</p>
                     <button className='h-full w-10 text-base text-white bg-black hover:bg-white hover:text-black hover:border-2 hover:border-black rounded-lg font-bold' onClick={() => setTrigger(!trigger)}>X</button>

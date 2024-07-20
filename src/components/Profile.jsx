@@ -19,7 +19,7 @@
 //             try {
 //                 const userData = await axios.get(`http://localhost:3001/api/v1/users/${userId}`)
 //             } catch (error) {
-                
+
 //             }
 //           }
 //     }, [])
@@ -86,7 +86,7 @@ const Profile = () => {
     const token = localStorage.getItem('token');
     const [isEditOpen, setEditOpen] = useState(false);
     const [confirmDelete, setconfirmDelete] = useState(false)
-    
+
     useEffect(() => {
         const fetchData = async () => {
             if (token) {
@@ -103,6 +103,8 @@ const Profile = () => {
                 } catch (error) {
                     console.error('Error fetching user data:', error);
                 }
+            }else{
+                window.location = '/';
             }
         };
 
@@ -123,7 +125,7 @@ const Profile = () => {
                     'Authorization': `Bearer ${token}`
                 }
             });
-            
+
             setUserData(null)
             window.location.href = '/';
         } catch (error) {
@@ -135,7 +137,7 @@ const Profile = () => {
     // if (!userData) {
     //     return <div>Loading...</div>; // You can add a more user-friendly loading indicator
     // }
-    if(!localStorage.getItem('token')) {
+    if (!localStorage.getItem('token')) {
         return window.location = '/'
     }
     return (
@@ -148,34 +150,36 @@ const Profile = () => {
                     <img className='w-8' src={back} alt='Go back' />
                 </Link>
             </div>
-            <div className='min-h-[40vh] w-full flex flex-col justify-center items-center'>
-                <img className='h-[30vh] rounded-full' src={user} alt='Profile'/>
+            <div className='min-h-[40vh]  w-full flex flex-col justify-center items-center'>
+                <img className='h-[25vh] md:h-[35vh] bg-gray-500 rounded-full' src={user} alt='Profile' />
             </div>
-            <div className='flex flex-col px-5 gap-5'>
-                <div className='flex gap-5 items-center'>
-                    <img className='w-8' src={user} alt='Name'/>
-                    <h2 className='text-2xl font-semibold'>{userData?.name || 'User Name'}</h2>
-                </div>
-                <div className='flex gap-5 items-center'>
-                    <img className='w-8' src={mail} alt='Mail'/>
-                    <h2 className='text-md font-semibold'>{userData?.email || 'Email Address'}</h2>
-                </div>
-                <div className='flex gap-5 items-center'>
-                    <img className='w-8' src={phone} alt='Phone'/>
-                    <h2 className='text-lg font-semibold'>{userData?.phone || 'Phone Number'}</h2>
-                </div>
-                <div className='flex gap-5 items-center'>
-                    <img className='w-8' src={status} alt='Status'/>
-                    <h2 className='text-lg font-semibold'>{token ? "Online": "Offline"}</h2>
+            <div className='flex flex-col px-5 gap-5 justify-center items-center h-fit w-full'>
+                <div className='flex flex-col gap-5 h-fit w-fit'>
+                    <div className='flex gap-5 items-center'>
+                        <img className='w-8' src={user} alt='Name' />
+                        <h2 className='text-2xl font-semibold'>{userData?.name || 'User Name'}</h2>
+                    </div>
+                    <div className='flex gap-5 items-center'>
+                        <img className='w-8' src={mail} alt='Mail' />
+                        <h2 className='text-md font-semibold'>{userData?.email || 'Email Address'}</h2>
+                    </div>
+                    <div className='flex gap-5 items-center'>
+                        <img className='w-8' src={phone} alt='Phone' />
+                        <h2 className='text-lg font-semibold'>{userData?.phone || 'Phone Number'}</h2>
+                    </div>
+                    <div className='flex gap-5 items-center'>
+                        <img className='w-8' src={status} alt='Status' />
+                        <h2 className='text-lg font-semibold'>{token ? "Online" : "Offline"}</h2>
+                    </div>
                 </div>
                 <div className='flex gap-5 h-fit w-full justify-center items-center'>
-                    <button 
+                    <button
                         className='h-10 w-28 border-2 border-black rounded-lg text-md font-semibold hover:bg-black hover:text-white uppercase tracking-wide'
                         onClick={handleClick}
                     >
                         Edit
                     </button>
-                    <button 
+                    <button
                         className='h-10 w-28 border-2 border-black rounded-lg text-md font-semibold hover:bg-black hover:text-white uppercase tracking-wide'
                         onClick={() => setconfirmDelete(!confirmDelete)}
                     >
@@ -183,8 +187,8 @@ const Profile = () => {
                     </button>
                 </div>
             </div>
-            {isEditOpen && <EditPage trigger={isEditOpen} setTrigger={setEditOpen}/>}
-            {confirmDelete && <Confirmation trigger={confirmDelete} setTrigger={setconfirmDelete} handleDelete = {handleDelete}/>}
+            {isEditOpen && <EditPage trigger={isEditOpen} setTrigger={setEditOpen} />}
+            {confirmDelete && <Confirmation trigger={confirmDelete} setTrigger={setconfirmDelete} handleDelete={handleDelete} />}
         </div>
     );
 };
