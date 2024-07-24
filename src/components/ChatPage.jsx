@@ -22,7 +22,7 @@ const ChatPage = () => {
   const [socket, setSocket] = useState(null)
 
   useEffect(() => {
-    setSocket(io('http://localhost:8000'))
+    setSocket(io('https://chat-app-backend-mgkx.onrender.com'))
   }, [])
 
   useEffect(() => {
