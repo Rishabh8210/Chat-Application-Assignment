@@ -99,7 +99,7 @@ const ChatPage = () => {
       console.log(userId, id, message)
       socket?.emit('sendMessage', {
         senderId: userId,
-        receiverId: parseInt(id),
+        receiverId: id,
         message: message
       })
       const data = {
