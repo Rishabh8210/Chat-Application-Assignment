@@ -22,7 +22,7 @@ const Profile = () => {
                 try {
                     const response = decodeJWT(token);
                     const userId = response.userId;
-                    const userDataResponse = await axios.get(`http://localhost:3001/api/v1/users/${userId}`, {
+                    const userDataResponse = await axios.get(`https://chat-app-backend-mgkx.onrender.com/api/v1/users/${userId}`, {
                         headers: {
                             'Authorization': `Bearer ${token}`
                         }

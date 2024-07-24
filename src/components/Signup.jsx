@@ -32,8 +32,10 @@ const Signup = ({ trigger, setTrigger }) => {
                 phone: values.phone,
                 role: values.role
             }
-            const response = await axios.post('http://localhost:3001/api/v1/auth/signup', data);
+            console.log(data);
+            const response = await axios.post('https://chat-app-backend-mgkx.onrender.com/api/v1/auth/signup', data);
             // console.log('Response from server:', response.data);
+            console.log(response)
             window.location = '/';
         } catch (error) {
             // console.error('Error registering user:', error);
@@ -138,9 +140,9 @@ const Signup = ({ trigger, setTrigger }) => {
                                 onBlur={handleBlur}
                             >
                                 <option className="" value="" label="Select role" />
-                                <option value="student" label="Student" />
-                                <option value="teacher" label="Teacher" />
-                                <option value="institute" label="Institute" />
+                                <option value="Student" label="Student" />
+                                <option value="Teacher" label="Teacher" />
+                                <option value="Institute" label="Institute" />
                             </select>
                             {errors.role && touched.role ? (
                                 <p className="text-xs text-red-600">{errors.role}</p>

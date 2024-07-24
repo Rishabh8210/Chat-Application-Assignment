@@ -32,7 +32,7 @@ const EditPage = ({ trigger, setTrigger }) => {
                 phone: values.phone || null
             }
             console.log(data)
-            const updatedData = await axios.patch(`http://localhost:3001/api/v1/users/${userId}`, data,{
+            const updatedData = await axios.patch(`https://chat-app-backend-mgkx.onrender.com/api/v1/users/${userId}`, data,{
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }

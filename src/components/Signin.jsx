@@ -32,7 +32,7 @@ const Signin = ({trigger, setTrigger}) => {
                 password: values.password
             }
             console.log(data)
-            const response = await axios.post('http://localhost:3001/api/v1/auth/signin', data);
+            const response = await axios.post('https://chat-app-backend-mgkx.onrender.com/api/v1/auth/signin', data);
             
             localStorage.setItem('token', response.data.token);         
             navigate('/chats');

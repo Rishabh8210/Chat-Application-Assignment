@@ -59,7 +59,7 @@ const ChatPage = () => {
     
     async function getDetails() {
       try {
-        const currUser = await axios.get(`http://localhost:3001/api/v1/users/${id}`, {
+        const currUser = await axios.get(`https://chat-app-backend-mgkx.onrender.com/api/v1/users/${id}`, {
           headers: {
             "Authorization": `Bearer ${token}`
           }
@@ -76,7 +76,7 @@ const ChatPage = () => {
     
     async function fetchMessages() {
       try {
-        const fetchedMessages = await axios.get(`http://localhost:3001/api/v1/conversations/${id}`, {
+        const fetchedMessages = await axios.get(`https://chat-app-backend-mgkx.onrender.com/api/v1/conversations/${id}`, {
           headers: {
             "Authorization": `Bearer ${token}`
           }
@@ -107,7 +107,7 @@ const ChatPage = () => {
         message: message
       }
       try {
-        const saveMessage = await axios.post(`http://localhost:3001/api/v1/conversations`, data, {
+        const saveMessage = await axios.post(`https://chat-app-backend-mgkx.onrender.com/api/v1/conversations`, data, {
           headers: {
             "Authorization": `Bearer ${token}`
           }

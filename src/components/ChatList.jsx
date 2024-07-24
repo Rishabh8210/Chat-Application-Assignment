@@ -20,13 +20,13 @@ const ChatList = () => {
       }
       const { userId } = decodeJWT(token);
       try {
-        const response = await axios.get('http://localhost:3001/api/v1/users/chats', {
+        const response = await axios.get('https://chat-app-backend-mgkx.onrender.com/api/v1/users/chats', {
           headers:{
             'Authorization': `Bearer ${token}`
           }
         })
         let users = response?.data?.data;
-        let filteredUsers = users.filter((user) => user.id !== userId)
+        let filteredUsers = users.filter((user) => user._id !== userId)
         setSearchedUser(filteredUsers);
         setFilteredUser(filteredUsers)
       } catch (error) {
@@ -87,7 +87,8 @@ const ChatList = () => {
         {
           searchedUser ? (searchedUser.length == 0 ? <p className='p-2 text-md font-semibold text-center text-red-700'>No user found !</p> :
             searchedUser.map((user, index) => {
-              return <Link to={`/chat/${user?.id}`}><ChatCard user={user} key={user?.id} /></Link>
+              console.log(user)
+              return <Link to={`/chat/${user?._id}`}><ChatCard user={user} key={user?.id} /></Link>
             })) : <></>
         }
       </div>
