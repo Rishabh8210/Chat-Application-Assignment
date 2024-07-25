@@ -135,9 +135,9 @@ const ChatPage = () => {
           }
         </div>
       </div>
-      <div className='h-[82%] py-2 px-3 w-full overflow-scroll flex flex-col flex-shrink-0 gap-2'>
+      <div className='h-[82%] py-2 px-3 w-full overflow-y-scroll flex flex-col flex-shrink-0 gap-2 bg-scroll'>
         {
-          chatMessages && chatMessages.map((message, index) => {
+          chatMessages && chatMessages.map((message) => {
             if (message?.receiverId != id)
               return <ReveiverMessageCard key={message?.id} message={message} />
             else

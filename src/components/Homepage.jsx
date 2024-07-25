@@ -3,8 +3,8 @@ import hamburg from '../assets/hamburg.png'
 import login from '../assets/login.png'
 import MainLogo from '../assets/MainLogo.png'
 import Signin from './Signin'
-import { useNavigate } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import { decodeJWT } from '../utils/helper'
 
 const NavBar = ({ trigger, setTrigger }) => {
   return (
@@ -14,10 +14,10 @@ const NavBar = ({ trigger, setTrigger }) => {
       </div>
       <h1 className='text-2xl uppercase font-bold'>Convocave</h1>
       <ul className='h-fit py-10 w-full flex flex-col gap-5'>
-        <li className='text-3xl border-b-2 font-semibold'>Home</li>
-        <li className='text-3xl hover:border-b-2 hover:font-semibold'>About Us</li>
-        <li className='text-3xl hover:border-b-2 hover:font-semibold'>Services</li>
-        <li className='text-3xl hover:border-b-2 hover:font-semibold'>Contact</li>
+        <li className='text-3xl border-b-2 font-semibold cursor-pointer'onClick={() => setTrigger(!trigger)}>Home</li>
+        <li className='text-3xl hover:border-b-2 hover:font-semibold cursor-pointer'onClick={() => setTrigger(!trigger)}>About Us</li>
+        <li className='text-3xl hover:border-b-2 hover:font-semibold cursor-pointer'onClick={() => setTrigger(!trigger)}>Services</li>
+        <li className='text-3xl hover:border-b-2 hover:font-semibold cursor-pointer'onClick={() => setTrigger(!trigger)}>Contact</li>
       </ul>
     </div>
   )
@@ -31,17 +31,18 @@ const Homepage = () => {
   const navigate = useNavigate()
 
   function handleClick() {
-    if(localStorage.getItem('token'))
-      return navigate('/chats')
-    setSignInOpen(!isSignInOpen)
+    if(decodeJWT(localStorage.getItem('token')))
+      window.location = '/chats'
+    else
+      setSignInOpen(!isSignInOpen)
   }
 
   return (
     <div className='min-h-screen w-screen'>
       <div className='bg-white h-12 w-screen flex p-1.5 justify-between items-center'>
-        <img className='h-9' src={hamburg} alt='#' onClick={() => setNavOpen(!isNavOpen)} />
-        <h1 className='text-xl uppercase font-bold'>Convocave</h1>
-        <img className='h-7' src={login} alt='#' onClick={() => handleClick()} />
+        <img className='h-9 cursor-pointer' src={hamburg} alt='#' onClick={() => setNavOpen(!isNavOpen)} />
+        <Link to={'/chats'}><h1 className='text-xl uppercase font-bold'>Convocave</h1></Link>
+        <img className='h-7 cursor-pointer' src={login} alt='#' onClick={() => handleClick()} />
       </div>
       <div className=' min-h-[50vh] flex flex-col items-center justify-center py-10 px-5 gap-2'>
         <img className='w-[50%] sm:w-[40%] md:w-[30%] lg:w-[20%]' src={MainLogo} alt='Image' />

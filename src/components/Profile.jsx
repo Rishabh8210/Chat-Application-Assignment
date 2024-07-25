@@ -45,16 +45,16 @@ const Profile = () => {
     };
 
     const handleDelete = async () => {
-        localStorage.clear('token')
         try {
             const response = decodeJWT(token);
             const userId = response.userId;
-            const userDataResponse = await axios.delete(`http://localhost:3001/api/v1/users/${userId}`, {
+            const userDataResponse = await axios.delete(`https://chat-application-assignment.vercel.app/api/v1/users/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
             });
-
+            
+            localStorage.clear('token')
             setUserData(null)
             window.location.href = '/';
         } catch (error) {

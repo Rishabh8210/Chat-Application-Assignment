@@ -18,8 +18,8 @@ const ChatList = () => {
       if (!localStorage.getItem('token')) {
         return window.location = '/'
       }
-      const { userId } = decodeJWT(token);
       try {
+        const { userId } = decodeJWT(token);
         const response = await axios.get('https://chat-app-backend-mgkx.onrender.com/api/v1/users/chats', {
           headers:{
             'Authorization': `Bearer ${token}`
@@ -31,6 +31,7 @@ const ChatList = () => {
         setFilteredUser(filteredUsers)
       } catch (error) {
         console.log(error)
+        window.location = '/'
       }
     }
 
@@ -70,11 +71,11 @@ const ChatList = () => {
             <input className='h-11 w-[75%] text-lg px-2 outline-none border-b-2 transition-all' type='text' name='search' placeholder='Search' onChange={(e) => handleChange(e)} />
 
           </div> :
-            <h1 className='text-xl uppercase font-bold transition-all'>Convocave</h1>
+            <Link to={'/chats'}><h1 className='text-xl hover:scale-105 uppercase font-bold transition-all'>Convocave</h1></Link>
         }
         <div className='h-full w-fit flex gap-5 justify-center items-center relative'>
-          <img className='w-6' src={search} alt='Search' onClick={() => { setSearchOpen(!isSearchOpen) }} />
-          <img className='h-7' src={dots} alt='menu' onClick={() => setMenuOpen(!isMenuOpen)} />
+          <img className='w-6 hover:scale-110 cursor-pointer' src={search} alt='Search' onClick={() => { setSearchOpen(!isSearchOpen) }} />
+          <img className='h-7 hover:scale-110 cursor-pointer' src={dots} alt='menu' onClick={() => setMenuOpen(!isMenuOpen)} />
         </div>
         {
           isMenuOpen && <div className='h-fit bg-white w-44 px-3 py-2 flex flex-col absolute right-0 top-12 shadow-xl rounded-lg'>

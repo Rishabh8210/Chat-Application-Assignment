@@ -49,7 +49,7 @@ const Signin = ({trigger, setTrigger}) => {
     }
 
 
-    if(isLoggedIn){
+    if(!trigger){
         navigate('/chats')
         return 
     }
